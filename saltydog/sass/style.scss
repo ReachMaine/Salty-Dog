@@ -1,0 +1,91 @@
+/*
+Theme Name:		Salty Dog Gallyery
+Author:			Reach Maine Marketing
+Author URI:		reachmaine.com
+Description: 	A CHILD theme for Cypress parent theme for Salty Dog Galery.
+Template:		cypress
+Version:		1.1.5
+Text Domain:	cypress
+*/
+/* dont need to include parent css, do via functions.php */
+/* =Theme customization starts here */
+@import "partials/settings";
+@import "partials/woocommerce";
+
+#secondary-nav {
+	a {
+		color: $top-menu-color;
+	}
+}
+.woocommerce ul.products li {
+	padding: 5px;
+}
+.term-description {
+	margin: -1em 0 2em;	
+	width: initial;
+	text-align: left;
+	padding-left: 30px; // same as article .post-content
+	padding-right: 30px;
+	line-height: 1.52em; // taken from article .post-content
+  	letter-spacing: .08em;// taken from article .post-content
+  	font-size: 100%;
+	p {
+		margin-bottom: 20px;
+	}
+}
+.woocommerce-tabs {
+	h2 {
+		font-size: 22px;
+	}
+}
+.related.products {
+	clear: both;
+	h2 {
+		font-size: 22px;
+	}
+}
+// css the product page to have image above description.
+.woocommerce div.product.product_tag-horizontal-image div.images, 
+.woocommerce #content div.product_tag-horizontal-image div.images, 
+.woocommerce-page div.product.product_tag-horizontal-image div.images, 
+.woocommerce-page #content div.product.product_tag-horizontal-image div.images {
+	width: initial;
+}
+.woocommerce div.product.product_tag-horizontal-image div.summary, 
+.woocommerce #content div.product.product_tag-horizontal-image div.summary, 
+.woocommerce-page div.product.product_tag-horizontal-image div.summary, 
+.woocommerce-page #content div.product.product_tag-horizontal-image div.summary {
+	width: 100%;
+	float: left;
+}
+
+// too much spacing between product summary & product tabs.
+.woocommerce div.product div.summary, 
+.woocommerce #content div.product div.summary, 
+.woocommerce-page div.product div.summary, 
+.woocommerce-page #content div.product div.summary {
+   margin-bottom: 10px;
+}
+
+// keep variations from getting to wide (looks silly)
+.variations_form .variations{
+	max-width: 400px;
+}
+
+// footer
+#footer.vertical {
+	padding-top: 0px;
+	padding-bottom: 0px;
+	.credits {
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+}
+
+article .post-content,
+.term-description {
+	padding-left: 40px; // same as article .post-content
+	padding-right: 40px;
+}
+@import "partials/media"; // keep at end of of file 
+/* EOF */

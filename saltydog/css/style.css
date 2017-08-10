@@ -1,0 +1,82 @@
+/*
+Theme Name:		Salty Dog Gallyery
+Author:			Reach Maine Marketing
+Author URI:		reachmaine.com
+Description: 	A CHILD theme for Cypress parent theme for Salty Dog Galery.
+Template:		cypress
+Version:		1.1.5
+Text Domain:	cypress
+*/
+/* dont need to include parent css, do via functions.php */
+/* =Theme customization starts here */
+/* Colors ---------------------------------------------- */
+/* Typography ------------------------------------------ */
+/* -----------Woocommerce styling ------------------------------------ */
+.woocommerce table.cart td.proceed-to-checkout,
+.woocommerce #content table.cart td.proceed-to-checkout {
+  background-color: transparent; }
+
+/* ----------- end Woocommercer styling ------------------------------- */
+#secondary-nav a {
+  color: #e7cc89; }
+
+.woocommerce ul.products li {
+  padding: 5px; }
+
+.term-description {
+  margin: -1em 0 2em;
+  width: initial;
+  text-align: left;
+  padding-left: 30px;
+  padding-right: 30px;
+  line-height: 1.52em;
+  letter-spacing: .08em;
+  font-size: 100%; }
+  .term-description p {
+    margin-bottom: 20px; }
+
+.woocommerce-tabs h2 {
+  font-size: 22px; }
+
+.related.products {
+  clear: both; }
+  .related.products h2 {
+    font-size: 22px; }
+
+.woocommerce div.product.product_tag-horizontal-image div.images,
+.woocommerce #content div.product_tag-horizontal-image div.images,
+.woocommerce-page div.product.product_tag-horizontal-image div.images,
+.woocommerce-page #content div.product.product_tag-horizontal-image div.images {
+  width: initial; }
+
+.woocommerce div.product.product_tag-horizontal-image div.summary,
+.woocommerce #content div.product.product_tag-horizontal-image div.summary,
+.woocommerce-page div.product.product_tag-horizontal-image div.summary,
+.woocommerce-page #content div.product.product_tag-horizontal-image div.summary {
+  width: 100%;
+  float: left; }
+
+.woocommerce div.product div.summary,
+.woocommerce #content div.product div.summary,
+.woocommerce-page div.product div.summary,
+.woocommerce-page #content div.product div.summary {
+  margin-bottom: 10px; }
+
+.variations_form .variations {
+  max-width: 400px; }
+
+#footer.vertical {
+  padding-top: 0px;
+  padding-bottom: 0px; }
+  #footer.vertical .credits {
+    margin-top: 0px;
+    margin-bottom: 0px; }
+
+article .post-content,
+.term-description {
+  padding-left: 40px;
+  padding-right: 40px; }
+
+/* ----  Media Settings --------------------------------- */
+/* end Media Settings ------------------------------------------ */
+/* EOF */

@@ -1,0 +1,13 @@
+/*
+Theme Name:		Salty Dog Gallyery
+Author:			Reach Maine Marketing
+Author URI:		reachmaine.com
+Description: 	A CHILD theme for Cypress parent theme for Salty Dog Galery.
+Template:		cypress
+Version:		1.1.5
+Text Domain:	cypress
+*/
+/* dont need to include parent css, do via functions.php */
+/* =Theme customization starts here */
+
+/* EOF */
