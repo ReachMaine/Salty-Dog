@@ -1,8 +1,8 @@
-<?php 
-/* woocommerce customizations 
+<?php
+/* woocommerce customizations
 */
 
-// add link back to order in admin email 
+// add link back to order in admin email
 add_action( 'woocommerce_email_after_order_table', 'add_link_back_to_order', 10, 2 );
 function add_link_back_to_order( $order, $is_admin ) {
 
@@ -42,11 +42,11 @@ add_filter( 'wc_product_sku_enabled', '__return_false' );
 	if ( ! function_exists( 'eai_loop_product_thumbnail' ) ) {
 
 		function eai_loop_product_thumbnail( $size = 'shop_catalog', $placeholder_width = 0, $placeholder_height = 0  ) {
-			
+
 			global $post, $product, $yith_wcwl, $of_cypress;
-			
+
 			$products_settings = !empty($of_cypress['products_settings']) ? $of_cypress['products_settings'] : '';
-			
+
 			// get image format from theme options:
 			$of_imgformat = $of_cypress['shop_image_format'];
 			if( $of_imgformat == 'as-portrait' ||  $of_imgformat == 'as-landscape' ){
@@ -54,57 +54,57 @@ add_filter( 'wc_product_sku_enabled', '__return_false' );
 			}else{
 				$img_format = 'shop_catalog';
 			}
-			
+
 			$title = '<a href="' . get_permalink(). '" title="'. esc_attr( $post->post_title ) .'"><h3>'. get_the_title(). '</h3></a>';
-			
-			
+
+
 			echo '<div class="front">';
-			
+
 			function_exists('woocommerce_show_product_loop_sale_flash') ? woocommerce_show_product_loop_sale_flash() : '';
-				
-			echo as_image( $img_format ); 
-			
+
+			echo as_image( $img_format );
+
 			echo '</div>';
-			
+
 			echo '<div class="back z">';
-			
+
 				//echo '<div class="item-overlay"></div>';
 				echo '<a href="' . get_permalink(). '" title="'. esc_attr( $post->post_title ) .'"> <div class="item-overlay"></div></a>';
 				echo $title;
-				
+
 				function_exists('woocommerce_template_loop_rating') ? woocommerce_template_loop_rating() : '';
-				
+
 				do_action( 'woocommerce_after_shop_loop_item_title' );
-			
+
 				$attachment_ids = $product->get_gallery_attachment_ids();
-				
-		
-				
+
+
+
 				if ( !empty($attachment_ids) ) {
 					$image_url	= wp_get_attachment_image_src( $attachment_ids[0], 'large'  );
 					$img_url	= $image_url[0];
 					$imgSizes	= all_image_sizes(); // as custom fuction
 					$img_width	= $imgSizes[$img_format]['width'];
 					$img_height = $imgSizes[$img_format]['height'];
-					
+
 					echo '<img src="'. fImg::resize( $img_url ,$img_width, $img_height, true  ) .'" alt="'. esc_attr($post->post_title) .'" class="back-image" />';
-										
+
 				}else{
 					echo as_image( $img_format );
 				}
-		
+
 				echo '<div class="back-buttons">';
-					
+
 					if( !isset($products_settings['disable_zoom_button']) ) {
 						echo '<a href="'.as_get_full_img_url().'" class="button" data-rel="prettyPhoto" title="'. esc_attr($post->post_title) .'"><div class="fs" aria-hidden="true" data-icon="&#xe022;"></div></a>';
 					}
 					if( !isset($products_settings['disable_link_button']) ) {
 						echo '<a href="'. get_permalink() .'" class="button" title="'. esc_attr($post->post_title) .'"><div class="fs" aria-hidden="true" data-icon="&#xe065;"></div></a>';
 					}
-					
-				
+
+
 				echo '</div>';
-				
+
 			echo '</div>';
 
 		}
@@ -121,7 +121,7 @@ function get_related_custom( $id, $limit = 5 ) {
     /* $terms = wp_get_post_terms($id, 'product_tag');
     foreach ( $terms as $term ) $tags_array[] = $term->term_id; */
 
-    // Get categories 
+    // Get categories
     $terms = wp_get_post_terms($id, 'product_cat');
     foreach ( $terms as $term ) $cats_array[] = $term->term_id;
 
@@ -154,13 +154,13 @@ function get_related_custom( $id, $limit = 5 ) {
 }
 add_action('init','get_related_custom');
 
-function eai_prev_next_product() { 
-	
+function eai_prev_next_product() {
+
 	$output = '<nav class="nav nav-single">';
-		
+
 		$prev_icon = '<div class="fs" aria-hidden="true" data-icon="&#xe169;"></div>';
 		$next_icon = '<div class="fs" aria-hidden="true" data-icon="&#xe16c;"></div>';
-		
+
 		$prevPost	= get_previous_post(true, '', 'product_cat'); // next product within category
 		$prevURL	= $prevPost ? get_permalink($prevPost->ID) : '';
 		$prevTitle	= $prevPost ? $prevPost->post_title : '';
@@ -169,7 +169,7 @@ function eai_prev_next_product() {
 		$nextURL	= $nextPost ? get_permalink($nextPost->ID) : '';
 		$nextTitle	= $nextPost ? $nextPost->post_title : '';
 		$nextPrefix = __('Next entry: ','cypress');
-		
+
 		if( $prevPost ) {
 			$output .= '<span class="nav-previous">';
 			$output .= '<a href="'. $prevURL .'" rel="prev" title="'. esc_attr($prevTitle) .'" class="left">';
@@ -179,7 +179,7 @@ function eai_prev_next_product() {
 		} else {
 			$output .= '<!-- no previous post -->';
 		}
-		
+
 		if( $nextPost ) {
 			$output .= '<span class="nav-next">';
 			$output .= 		'<a href="'. $nextURL .'" rel="next" title="'. esc_attr($nextTitle). '" class="right">';
@@ -189,9 +189,19 @@ function eai_prev_next_product() {
 		} else {
 			$output .= '<!-- no next post -->';
 		}
-		
+
 	$output .= '</nav><!-- .nav-single -->';
-	
+
 	return $output;
+}
+
+// add to message to any product without price.
+add_filter('woocommerce_empty_price_html', 'reach_empty_price', 10, 2);
+function reach_empty_price( $var, $instance) {
+	  $html = "";
+		if ( is_single(get_the_ID()) )  {
+    	$html = '<h5 style="text-align:center" class="call-for-pricing">Please call with questions about print sizes and pricing.</h5>';
+		}
+    return $var.$html;
 }
 ?>
